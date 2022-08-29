@@ -7,7 +7,7 @@
 ```sh
 wget "https://github.com/nesorter/nesorter-docker/archive/refs/heads/main.zip" && \
 unzip main.zip && \
-cd nesorter-docker && \
+cd nesorter-docker-main && \
 docker-compose pull
 ```
 
