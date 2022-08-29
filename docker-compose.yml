@@ -28,6 +28,8 @@ services:
       - SHOUT_MOUNT=neformat.mp3
       - SHOUT_USER=neformat
       - SHOUT_PASSWORD=12345678
+      - SHOUT_STREAM_NAME=NameOfYourStream
+      - SHOUT_STREAM_DESCRIPTION=YourStreamDescription
     ports:
       - "8000:8000"
 
@@ -47,6 +49,8 @@ services:
       - SHOUT_PASSWORD=12345678
       - SHOUT_URL=http://localhost:8000/neformat.mp3
       - SHOUT_DESCRIPTION=Its test stream
+      - SHOUT_ADMIN_USER=admin
+      - SHOUT_ADMIN_PASSWORD=apass
 
       - MPV_FADE_TIME=0
       - FFMPEG_BITRATE=196
