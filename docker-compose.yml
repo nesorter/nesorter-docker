@@ -3,7 +3,7 @@ version: '3.7'
 services:
   icecast2:
     image: kugichka/nesorter-icecast:latest
-    container_name: icecast2
+    container_name: icecast2_0
     restart: always
     environment:
       - SHOUT_ADMIN_EMAIL=your@address.com
@@ -32,14 +32,17 @@ services:
       - "8000:8000"
 
   api:
+    user: node
     image: kugichka/nesorter-api:latest
+    container_name: api_0
     restart: always
     ports:
       - "3001:3001"
     volumes:
-      - /Users/kugi/Music:/app/lib:ro
-      - ./data/prisma:/app/prisma/db:rw
-      - ./data/covers:/app/dist/API/routes/assets/covers:rw
+      - /run/user/1000/pulse/native:/run/user/1000/pulse/native:rw
+      - /home/kugichka/Музыка/citypop:/home/node/lib:ro
+      - ./data/prisma:/home/node/prisma/db:rw
+      - ./data/covers:/home/node/dist/API/routes/assets/covers:rw
     environment:
       - SHOUT_HOST=icecast2
       - SHOUT_MOUNT=neformat.mp3
@@ -48,12 +51,21 @@ services:
       - SHOUT_URL=http://localhost:8000/neformat.mp3
       - SHOUT_DESCRIPTION=Its test stream
 
-      - MPV_FADE_TIME=0
-      - FFMPEG_BITRATE=196
+      - CONTENT_ROOT_DIR_PATH=/home/node/lib
+
+      - PLAYING_MODE=hardware
+      - HARDWARE_PLAYER_FFMPEG_DRIVER=pulse
+      - HARDWARE_PLAYER_FFMPEG_DEVICE=alsa_output.pci-0000_0d_00.4.analog-stereo.monitor
+
+      - MPV_FADE_TIME=5
+      - FFMPEG_BITRATE=320
       - FFMPEG_FORMAT=mp3
+
+      - PULSE_SERVER=unix:/run/user/1000/pulse/native
 
   front:
     image: kugichka/nesorter-front:latest
+    container_name: front_0
     restart: always
     ports:
       - "3000:3000"
