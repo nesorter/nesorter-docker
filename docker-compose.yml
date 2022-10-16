@@ -41,8 +41,8 @@ services:
     ports:
       - "3001:3001"
     volumes:
-      - /run/user/1000/pulse/native:/run/user/1000/pulse/native:rw
-      - /home/kugichka/Музыка/citypop:/home/node/lib:ro
+      - /run/user/1000/pulse:/run/user/1000/pulse:ro
+      - /home/kugichka/Музыка:/home/node/lib:ro
       - ./data/prisma:/home/node/prisma/db:rw
       - ./data/covers:/home/node/dist/API/routes/assets/covers:rw
     environment:
