@@ -54,6 +54,7 @@ services:
       - SHOUT_DESCRIPTION=Its test stream
       - SHOUT_ADMIN_USER=admin
       - SHOUT_ADMIN_PASSWORD=apass
+      - ADMIN_TOKEN=secret
 
       - CONTENT_ROOT_DIR_PATH=/home/node/lib
       - TZ_HOURS_SHIFT=4
