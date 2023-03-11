@@ -42,7 +42,7 @@ services:
       - "3000:3000"
     volumes:
       - /run/user/1000/pulse:/run/user/1000/pulse:ro
-      - /Users/Username/Music:/home/node/lib:ro
+      - /Users/Username/Music:/home/node/lib:rw
       - ./data/prisma:/home/node/prisma/db:rw
       - ./data/covers:/home/node/dist/API/routes/assets/covers:rw
     environment:
