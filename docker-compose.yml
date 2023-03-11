@@ -25,8 +25,8 @@ services:
       - SHOUT_SYSTEM_TUNE_BURST_ON_CONNECT=1
       - SHOUT_SYSTEM_TUNE_BURST_SIZE=65535
 
-      - SHOUT_MOUNT=neformat.mp3
-      - SHOUT_USER=neformat
+      - SHOUT_MOUNT=stream.mp3
+      - SHOUT_USER=stream
       - SHOUT_PASSWORD=12345678
       - SHOUT_STREAM_NAME=NameOfYourStream
       - SHOUT_STREAM_DESCRIPTION=YourStreamDescription
@@ -35,22 +35,22 @@ services:
 
   api:
     user: node
-    image: kugichka/nesorter-api:latest
-    container_name: api_0
+    image: kugichka/nesorter:latest
+    container_name: nesorter_0
     restart: always
     ports:
-      - "3001:3001"
+      - "3000:3000"
     volumes:
       - /run/user/1000/pulse:/run/user/1000/pulse:ro
-      - /home/kugichka/Музыка:/home/node/lib:ro
+      - /Users/Username/Music:/home/node/lib:ro
       - ./data/prisma:/home/node/prisma/db:rw
       - ./data/covers:/home/node/dist/API/routes/assets/covers:rw
     environment:
       - SHOUT_HOST=icecast2
-      - SHOUT_MOUNT=neformat.mp3
-      - SHOUT_USER=neformat
+      - SHOUT_MOUNT=stream.mp3
+      - SHOUT_USER=stream
       - SHOUT_PASSWORD=12345678
-      - SHOUT_URL=http://localhost:8000/neformat.mp3
+      - SHOUT_URL=http://localhost:8000/stream.mp3
       - SHOUT_DESCRIPTION=Its test stream
       - SHOUT_ADMIN_USER=admin
       - SHOUT_ADMIN_PASSWORD=apass
@@ -68,10 +68,3 @@ services:
       - FFMPEG_FORMAT=mp3
 
       - PULSE_SERVER=unix:/run/user/1000/pulse/native
-
-  front:
-    image: kugichka/nesorter-front:latest
-    container_name: front_0
-    restart: always
-    ports:
-      - "3000:3000"
